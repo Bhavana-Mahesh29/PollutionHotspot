@@ -160,8 +160,9 @@ python main.py
 
 ## 👥 Team Members
 
-* Bhavana
-* (Add your teammates here)
+* Aruna Shivani 24BCS030
+* Bhavana M 24BCS045
+* Dharshini G 24BCS065
 
 ---
 
