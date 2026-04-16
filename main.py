@@ -30,7 +30,7 @@ import warnings
 warnings.filterwarnings('ignore')
 from IPython.display import display
 
-df = pd.read_excel("/content/MLfeb8.xlsx")
+df = pd.read_excel(r"C:\Users\bhava\Desktop\pollution-hotspot-ml\data\MLfeb8.xlsx")
 
 print("Shape:", df.shape)
 print("\nFirst 5 rows:")
@@ -495,7 +495,53 @@ from sklearn.metrics import accuracy_score, f1_score
 
 dl_accuracy = accuracy_score(y_test, y_pred_labels)
 dl_f1 = f1_score(y_test, y_pred_labels, average='weighted')
+dl_precision = precision_score(y_test, y_pred_labels, average='weighted')
+dl_recall = recall_score(y_test, y_pred_labels, average='weighted')
 
 print("Deep Learning Model:")
 print("Accuracy:", dl_accuracy)
 print("F1 Score:", dl_f1)
+print("Precison:",dl_precision)
+print("Recall:",dl_recall)
+
+#comparison with baseline models
+# Add Deep Learning results to comparison table
+
+results_df.loc["Deep Learning (MLP)"] = {
+    "Accuracy": dl_accuracy,
+    "Precision":dl_precision ,
+    "Recall": dl_recall,
+    "F1 Score": dl_f1,
+    "CV F1 (mean)": dl_f1,
+    "CV F1 (std)": 0
+
+}
+
+print("✅ Deep Learning added to comparison")
+
+results_df = results_df.sort_values("F1 Score", ascending=False)
+print(results_df)
+
+import matplotlib.pyplot as plt
+
+plot_cols = ["Accuracy", "F1 Score"]
+
+results_df[plot_cols].plot(
+    kind="bar",
+    figsize=(10, 6),
+    edgecolor="black"
+)
+
+plt.title("Model Comparison (ML vs Deep Learning)")
+plt.ylabel("Score")
+plt.xticks(rotation=30)
+plt.ylim(0, 1.1)
+plt.tight_layout()
+plt.show()
+
+best_model = results_df["F1 Score"].idxmax()
+best_score = results_df["F1 Score"].max()
+
+print(f"🏆 Best Model: {best_model}")
+print(f"F1 Score: {best_score:.4f}")
+display(results_df.style.highlight_max(axis=0, color="lightgreen"))
