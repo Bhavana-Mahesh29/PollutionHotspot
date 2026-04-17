@@ -32,7 +32,7 @@ Data Collection → Data Preprocessing → Feature Engineering → Model Trainin
 
 ## 📊 Dataset Details
 
-* **Source:** Custom Air Quality Dataset
+* **Source:** https://data.opencity.in/organization/government-of-tamil-nadu
 * **Format:** Excel (.xlsx)
 
 ### Features:
